@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloodAlert</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav {
+      text-align: center;
+      padding: 10px;
+      background-color: #444;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      margin: 0 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .instructions {
+      margin-top: 20px;
+    }
+
+    .instructions h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FloodAlert</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="floodmaps.html">Flood Maps</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="deletion.html">Data Deletion</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <script>
+      window.fbAsyncInit = function() {
+        // Initialize the Facebook SDK
+        FB.init({
+          appId      : '{1069517257427665}',  
+          cookie     : true,
+          xfbml      : true,
+          version    : '{v18.0}'  
+        });
+          
+        // Log a page view event
+        FB.AppEvents.logPageView();
+
+        // Check the login status on page load
+        checkLoginState();
+      };
+
+      // Load the Facebook SDK asynchronously
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      // Your statusChangeCallback function goes here
+      function statusChangeCallback(response) {
+        if (response.status === 'connected') {
+          // The user is logged in and authenticated
+          console.log('Logged in and authenticated');
+
+          // Access the authentication response details
+          var authResponse = response.authResponse;
+          console.log('Access Token:', authResponse.accessToken);
+          console.log('Expires In:', authResponse.expiresIn);
+          console.log('Signed Request:', authResponse.signedRequest);
+          console.log('User ID:', authResponse.userID);
+        } else if (response.status === 'not_authorized') {
+          // The user is logged in but has not authorized your app
+          console.log('Logged in but not authorized');
+        } else {
+          // The user is not logged in or not authenticated
+          console.log('Not logged in or not authenticated');
+        }
+      }
+
+      // Function to check login state
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+    </script>
+
+    <div class="instructions">
+      <h2>Privacy Policy for FloodAlert</h2>
+      <p><strong>1. Introduction</strong></p>
+      <p>Welcome to FloodAlert! This Privacy Policy outlines how we collect, use, disclose, and protect the information you provide when using our mobile application. By using FloodAlert, you agree to the terms and practices described in this Privacy Policy.</p>
+      
+      <p><strong>2. Information We Collect</strong></p>
+      <p><strong>Location Data:</strong> FloodAlert collects location data to identify and map instances of local flooding. This data includes geolocation information from your device.</p>
+      <p><strong>User-Provided Information:</strong> Users have the option to submit additional information, such as descriptions or photos related to flooding reports.</p>
+      
+      <p><strong>3. How We Use Your Information</strong></p>
+      <p><strong>Mapping and Visualization:</strong> We use the collected data to map and visualize instances of local flooding, providing near-real-time information to users and raising public awareness.</p>
+      <p><strong>Communication:</strong> We may use your contact information to communicate with you about your reports and to provide updates on local flooding conditions.</p>
+      
+      <p><strong>4. Sharing Information</strong></p>
+      <p><strong>Public Awareness:</strong> Aggregated and anonymized data may be shared with the public, authorities, or relevant organizations to raise awareness about flooding and encourage appropriate action.</p>
+      <p><strong>Authorities:</strong> In certain situations, we may share data with local authorities or emergency services to assist in responding to flooding incidents.</p>
+      
+      <p><strong>5. Data Security</strong></p>
+      <p>We implement security measures to protect your information from unauthorized access, disclosure, alteration, and destruction.</p>
+      
+      <p><strong>6. Your Choices</strong></p>
+      <p>Users have the option to submit reports anonymously.</p>
+      <p>You can choose not to provide certain information, but this may limit the functionality of the app.</p>
+      
+      <p><strong>7. Third-Party Services</strong></p>
+      <p>FloodAlert may utilize third-party services for mapping, analytics, or other functionalities. These services may have their own privacy policies, and you are encouraged to review them.</p>
+      
+      <p><strong>8. Changes to This Privacy Policy</strong></p>
+      <p>We may update our Privacy Policy from time to time. Any changes will be reflected on this page, and users will be notified of significant updates.</p>
+      
+      <p><strong>9. Contact Us</strong></p>
+      <p>If you have any questions or concerns about this Privacy Policy, please contact us at <a href="mailto:pkalonde@mlw.mw">pkalonde@mlw.mw</a>.</p>
+      
+    </div>
+
+  </div>
+</body>
+</html>

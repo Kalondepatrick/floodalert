@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloodAlert</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav {
+      text-align: center;
+      padding: 10px;
+      background-color: #444;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      margin: 0 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .instructions {
+      margin-top: 20px;
+    }
+
+    .instructions h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FloodAlert</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="floodmaps.html">Flood Maps</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="deletion.html">Data Deletion</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <script>
+      window.fbAsyncInit = function() {
+        // Initialize the Facebook SDK
+        FB.init({
+          appId      : '{1069517257427665}',  
+          cookie     : true,
+          xfbml      : true,
+          version    : '{v18.0}'  
+        });
+          
+        // Log a page view event
+        FB.AppEvents.logPageView();
+
+        // Check the login status on page load
+        checkLoginState();
+      };
+
+      // Load the Facebook SDK asynchronously
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      // Your statusChangeCallback function goes here
+      function statusChangeCallback(response) {
+        if (response.status === 'connected') {
+          // The user is logged in and authenticated
+          console.log('Logged in and authenticated');
+
+          // Access the authentication response details
+          var authResponse = response.authResponse;
+          console.log('Access Token:', authResponse.accessToken);
+          console.log('Expires In:', authResponse.expiresIn);
+          console.log('Signed Request:', authResponse.signedRequest);
+          console.log('User ID:', authResponse.userID);
+        } else if (response.status === 'not_authorized') {
+          // The user is logged in but has not authorized your app
+          console.log('Logged in but not authorized');
+        } else {
+          // The user is not logged in or not authenticated
+          console.log('Not logged in or not authenticated');
+        }
+      }
+
+      // Function to check login state
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+    </script>
+
+    <div class="instructions">
+      <h2>Data Deletion Instructions for FloodAlert</h2>
+      <p><strong>Requesting Data Deletion</strong></p>
+      <p>If you wish to request the deletion of your data from FloodAlert, please email the lead developer <a href="mailto:pkalonde@mlw.mw">pkalonde@mlw.mw</a>. 
+        <li><strong>Provide Necessary Information:</strong> In your email, you will be expected to provide certain information to verify your identity. This may include your Facebook username and specific flood alert that you are asking for deletion.</li>
+      </ol>
+      <p><strong>Processing Your Request</strong></p>
+      <p><strong>Verification:</strong> Our team will review and verify the information provided in your request to accuracy of the data deletion process.</p>
+      <p><strong>Processing Time:</strong> Please note that the data deletion process may take a reasonable amount of time to complete (Our team is currently so small). We appreciate your patience during this period.</p>
+      <p><strong>Important Information</strong></p>
+      <p><strong>Retained Data:</strong> Certain data may be retained for legal or regulatory reasons, even after your data deletion request has been processed. We will only retain the minimum necessary information required for compliance with applicable laws.</p>
+      <p>Thank you for your understanding and cooperation in ensuring the privacy and security of your data with FloodAlert.</p>
+    </div>
+
+  </div>
+</body>
+</html>
