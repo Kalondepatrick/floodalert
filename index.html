@@ -65,12 +65,34 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+
   <script>
     const map = L.map('map').setView([-15.7730912,35.0422132], 8);
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    // Replace this URL with your Google Sheets to GeoJSON API endpoint
+    const geoJSONUrl = 'https://script.google.com/macros/s/AKfycbxv0lTL1pUJDTHeCJWTXuB0QLIGAihBvN2NdfvQVYTc48bWduYU6KB5Onvlu9ecZNlAHA/exec';
+
+    fetch(geoJSONUrl)
+      .then(response => response.json())
+      .then(data => {
+        L.geoJSON(data, {
+          onEachFeature: function(feature, layer) {
+            const popupContent = `
+              <strong>${feature.properties.name}</strong><br>
+              <strong>Date:</strong> ${feature.properties.Date}<br>
+              <strong>TA:</strong> ${feature.properties.TA} <br>
+              <strong>Specific Location:</strong> ${feature.properties.Location}<br>
+              <strong>Scenario:</strong> ${feature.properties.Scenario}<br>
+              <strong>Actual Post:</strong> ${feature.properties.Actual_post}<br>
+            `;
+            layer.bindPopup(popupContent);
+          }
+        }).addTo(map);
+      });
   </script>
 </body>
 </html>
